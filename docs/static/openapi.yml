@@ -99,6 +99,9 @@ paths:
             properties:
               winner:
                 type: string
+              highestBid:
+                type: string
+                format: uint64
         default:
           description: An unexpected error response.
           schema:
@@ -16884,6 +16887,9 @@ definitions:
     properties:
       winner:
         type: string
+      highestBid:
+        type: string
+        format: uint64
   cosa.cosa.MsgCreatBid:
     type: object
     properties:

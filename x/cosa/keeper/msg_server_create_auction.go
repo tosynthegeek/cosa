@@ -13,7 +13,7 @@ import (
 
 func (k msgServer) CreateAuction(goCtx context.Context, msg *types.MsgCreateAuction) (*types.MsgCreateAuctionResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
-	endtime := ctx.BlockTime().Add(time.Duration(msg.Duration) * time.Second)
+	endtime := timestamppb.New(time.Now().Add(time.Duration(msg.Duration)))
 	fmt.Printf("endtime: %v\n", endtime)
 
 	auction := types.Auction{
@@ -21,7 +21,7 @@ func (k msgServer) CreateAuction(goCtx context.Context, msg *types.MsgCreateAuct
 		Creator:       msg.Creator,
 		StartingPrice: msg.StartingPrice,
 		Duration:      msg.Duration,
-		Endtime:       timestamppb.New(endtime),
+		Endtime:       endtime,
 		Status:        Pending,
 	}
 
