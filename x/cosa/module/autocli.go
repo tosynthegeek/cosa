@@ -28,6 +28,12 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					RpcMethod: "UpdateParams",
 					Skip:      true, // skipped because authority gated
 				},
+				{
+					RpcMethod:      "CreateAuction",
+					Use:            "create-auction [item] [starting-price] [duration] [status]",
+					Short:          "Send a createAuction tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "item"}, {ProtoField: "startingPrice"}, {ProtoField: "duration"}, {ProtoField: "status"}},
+				},
 				// this line is used by ignite scaffolding # autocli/tx
 			},
 		},
