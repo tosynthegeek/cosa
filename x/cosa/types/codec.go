@@ -11,6 +11,12 @@ func RegisterInterfaces(registry cdctypes.InterfaceRegistry) {
 	registry.RegisterImplementations((*sdk.Msg)(nil),
 		&MsgCreateAuction{},
 	)
+	registry.RegisterImplementations((*sdk.Msg)(nil),
+		&MsgApproveAuction{},
+	)
+	registry.RegisterImplementations((*sdk.Msg)(nil),
+		&MsgCreatBid{},
+	)
 	// this line is used by starport scaffolding # 3
 
 	registry.RegisterImplementations((*sdk.Msg)(nil),

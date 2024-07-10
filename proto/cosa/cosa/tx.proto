@@ -16,8 +16,10 @@ service Msg {
   
   // UpdateParams defines a (governance) operation for updating the module
   // parameters. The authority defaults to the x/gov module account.
-  rpc UpdateParams  (MsgUpdateParams ) returns (MsgUpdateParamsResponse );
-  rpc CreateAuction (MsgCreateAuction) returns (MsgCreateAuctionResponse);
+  rpc UpdateParams   (MsgUpdateParams  ) returns (MsgUpdateParamsResponse  );
+  rpc CreateAuction  (MsgCreateAuction ) returns (MsgCreateAuctionResponse );
+  rpc ApproveAuction (MsgApproveAuction) returns (MsgApproveAuctionResponse);
+  rpc CreatBid       (MsgCreatBid      ) returns (MsgCreatBidResponse      );
 }
 // MsgUpdateParams is the Msg/UpdateParams request type.
 message MsgUpdateParams {
@@ -47,6 +49,31 @@ message MsgCreateAuction {
 }
 
 message MsgCreateAuctionResponse {
+  uint64 id = 1;
+}
+
+message MsgApproveAuction {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator       = 1;
+  string item          = 2;
+  uint64 id            = 3;
+  uint64 startingPrice = 4;
+}
+
+message MsgApproveAuctionResponse {
+  string status = 1;
+}
+
+message MsgCreatBid {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator   = 1;
+  string item      = 2;
+  uint64 auctionId = 3;
+  uint64 bidAmount = 4;
+  string bidder    = 5;
+}
+
+message MsgCreatBidResponse {
   uint64 id = 1;
 }
 

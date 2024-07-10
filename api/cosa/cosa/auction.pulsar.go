@@ -11,7 +11,527 @@ import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoiface "google.golang.org/protobuf/runtime/protoiface"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
+
+var (
+	md_Bid        protoreflect.MessageDescriptor
+	fd_Bid_bidder protoreflect.FieldDescriptor
+	fd_Bid_amount protoreflect.FieldDescriptor
+)
+
+func init() {
+	file_cosa_cosa_auction_proto_init()
+	md_Bid = File_cosa_cosa_auction_proto.Messages().ByName("Bid")
+	fd_Bid_bidder = md_Bid.Fields().ByName("bidder")
+	fd_Bid_amount = md_Bid.Fields().ByName("amount")
+}
+
+var _ protoreflect.Message = (*fastReflection_Bid)(nil)
+
+type fastReflection_Bid Bid
+
+func (x *Bid) ProtoReflect() protoreflect.Message {
+	return (*fastReflection_Bid)(x)
+}
+
+func (x *Bid) slowProtoReflect() protoreflect.Message {
+	mi := &file_cosa_cosa_auction_proto_msgTypes[0]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+var _fastReflection_Bid_messageType fastReflection_Bid_messageType
+var _ protoreflect.MessageType = fastReflection_Bid_messageType{}
+
+type fastReflection_Bid_messageType struct{}
+
+func (x fastReflection_Bid_messageType) Zero() protoreflect.Message {
+	return (*fastReflection_Bid)(nil)
+}
+func (x fastReflection_Bid_messageType) New() protoreflect.Message {
+	return new(fastReflection_Bid)
+}
+func (x fastReflection_Bid_messageType) Descriptor() protoreflect.MessageDescriptor {
+	return md_Bid
+}
+
+// Descriptor returns message descriptor, which contains only the protobuf
+// type information for the message.
+func (x *fastReflection_Bid) Descriptor() protoreflect.MessageDescriptor {
+	return md_Bid
+}
+
+// Type returns the message type, which encapsulates both Go and protobuf
+// type information. If the Go type information is not needed,
+// it is recommended that the message descriptor be used instead.
+func (x *fastReflection_Bid) Type() protoreflect.MessageType {
+	return _fastReflection_Bid_messageType
+}
+
+// New returns a newly allocated and mutable empty message.
+func (x *fastReflection_Bid) New() protoreflect.Message {
+	return new(fastReflection_Bid)
+}
+
+// Interface unwraps the message reflection interface and
+// returns the underlying ProtoMessage interface.
+func (x *fastReflection_Bid) Interface() protoreflect.ProtoMessage {
+	return (*Bid)(x)
+}
+
+// Range iterates over every populated field in an undefined order,
+// calling f for each field descriptor and value encountered.
+// Range returns immediately if f returns false.
+// While iterating, mutating operations may only be performed
+// on the current field descriptor.
+func (x *fastReflection_Bid) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
+	if x.Bidder != "" {
+		value := protoreflect.ValueOfString(x.Bidder)
+		if !f(fd_Bid_bidder, value) {
+			return
+		}
+	}
+	if x.Amount != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.Amount)
+		if !f(fd_Bid_amount, value) {
+			return
+		}
+	}
+}
+
+// Has reports whether a field is populated.
+//
+// Some fields have the property of nullability where it is possible to
+// distinguish between the default value of a field and whether the field
+// was explicitly populated with the default value. Singular message fields,
+// member fields of a oneof, and proto2 scalar fields are nullable. Such
+// fields are populated only if explicitly set.
+//
+// In other cases (aside from the nullable cases above),
+// a proto3 scalar field is populated if it contains a non-zero value, and
+// a repeated field is populated if it is non-empty.
+func (x *fastReflection_Bid) Has(fd protoreflect.FieldDescriptor) bool {
+	switch fd.FullName() {
+	case "cosa.cosa.Bid.bidder":
+		return x.Bidder != ""
+	case "cosa.cosa.Bid.amount":
+		return x.Amount != uint64(0)
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosa.cosa.Bid"))
+		}
+		panic(fmt.Errorf("message cosa.cosa.Bid does not contain field %s", fd.FullName()))
+	}
+}
+
+// Clear clears the field such that a subsequent Has call reports false.
+//
+// Clearing an extension field clears both the extension type and value
+// associated with the given field number.
+//
+// Clear is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_Bid) Clear(fd protoreflect.FieldDescriptor) {
+	switch fd.FullName() {
+	case "cosa.cosa.Bid.bidder":
+		x.Bidder = ""
+	case "cosa.cosa.Bid.amount":
+		x.Amount = uint64(0)
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosa.cosa.Bid"))
+		}
+		panic(fmt.Errorf("message cosa.cosa.Bid does not contain field %s", fd.FullName()))
+	}
+}
+
+// Get retrieves the value for a field.
+//
+// For unpopulated scalars, it returns the default value, where
+// the default value of a bytes scalar is guaranteed to be a copy.
+// For unpopulated composite types, it returns an empty, read-only view
+// of the value; to obtain a mutable reference, use Mutable.
+func (x *fastReflection_Bid) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
+	switch descriptor.FullName() {
+	case "cosa.cosa.Bid.bidder":
+		value := x.Bidder
+		return protoreflect.ValueOfString(value)
+	case "cosa.cosa.Bid.amount":
+		value := x.Amount
+		return protoreflect.ValueOfUint64(value)
+	default:
+		if descriptor.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosa.cosa.Bid"))
+		}
+		panic(fmt.Errorf("message cosa.cosa.Bid does not contain field %s", descriptor.FullName()))
+	}
+}
+
+// Set stores the value for a field.
+//
+// For a field belonging to a oneof, it implicitly clears any other field
+// that may be currently set within the same oneof.
+// For extension fields, it implicitly stores the provided ExtensionType.
+// When setting a composite type, it is unspecified whether the stored value
+// aliases the source's memory in any way. If the composite value is an
+// empty, read-only value, then it panics.
+//
+// Set is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_Bid) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
+	switch fd.FullName() {
+	case "cosa.cosa.Bid.bidder":
+		x.Bidder = value.Interface().(string)
+	case "cosa.cosa.Bid.amount":
+		x.Amount = value.Uint()
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosa.cosa.Bid"))
+		}
+		panic(fmt.Errorf("message cosa.cosa.Bid does not contain field %s", fd.FullName()))
+	}
+}
+
+// Mutable returns a mutable reference to a composite type.
+//
+// If the field is unpopulated, it may allocate a composite value.
+// For a field belonging to a oneof, it implicitly clears any other field
+// that may be currently set within the same oneof.
+// For extension fields, it implicitly stores the provided ExtensionType
+// if not already stored.
+// It panics if the field does not contain a composite type.
+//
+// Mutable is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_Bid) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
+	switch fd.FullName() {
+	case "cosa.cosa.Bid.bidder":
+		panic(fmt.Errorf("field bidder of message cosa.cosa.Bid is not mutable"))
+	case "cosa.cosa.Bid.amount":
+		panic(fmt.Errorf("field amount of message cosa.cosa.Bid is not mutable"))
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosa.cosa.Bid"))
+		}
+		panic(fmt.Errorf("message cosa.cosa.Bid does not contain field %s", fd.FullName()))
+	}
+}
+
+// NewField returns a new value that is assignable to the field
+// for the given descriptor. For scalars, this returns the default value.
+// For lists, maps, and messages, this returns a new, empty, mutable value.
+func (x *fastReflection_Bid) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
+	switch fd.FullName() {
+	case "cosa.cosa.Bid.bidder":
+		return protoreflect.ValueOfString("")
+	case "cosa.cosa.Bid.amount":
+		return protoreflect.ValueOfUint64(uint64(0))
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosa.cosa.Bid"))
+		}
+		panic(fmt.Errorf("message cosa.cosa.Bid does not contain field %s", fd.FullName()))
+	}
+}
+
+// WhichOneof reports which field within the oneof is populated,
+// returning nil if none are populated.
+// It panics if the oneof descriptor does not belong to this message.
+func (x *fastReflection_Bid) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
+	switch d.FullName() {
+	default:
+		panic(fmt.Errorf("%s is not a oneof field in cosa.cosa.Bid", d.FullName()))
+	}
+	panic("unreachable")
+}
+
+// GetUnknown retrieves the entire list of unknown fields.
+// The caller may only mutate the contents of the RawFields
+// if the mutated bytes are stored back into the message with SetUnknown.
+func (x *fastReflection_Bid) GetUnknown() protoreflect.RawFields {
+	return x.unknownFields
+}
+
+// SetUnknown stores an entire list of unknown fields.
+// The raw fields must be syntactically valid according to the wire format.
+// An implementation may panic if this is not the case.
+// Once stored, the caller must not mutate the content of the RawFields.
+// An empty RawFields may be passed to clear the fields.
+//
+// SetUnknown is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_Bid) SetUnknown(fields protoreflect.RawFields) {
+	x.unknownFields = fields
+}
+
+// IsValid reports whether the message is valid.
+//
+// An invalid message is an empty, read-only value.
+//
+// An invalid message often corresponds to a nil pointer of the concrete
+// message type, but the details are implementation dependent.
+// Validity is not part of the protobuf data model, and may not
+// be preserved in marshaling or other operations.
+func (x *fastReflection_Bid) IsValid() bool {
+	return x != nil
+}
+
+// ProtoMethods returns optional fastReflectionFeature-path implementations of various operations.
+// This method may return nil.
+//
+// The returned methods type is identical to
+// "google.golang.org/protobuf/runtime/protoiface".Methods.
+// Consult the protoiface package documentation for details.
+func (x *fastReflection_Bid) ProtoMethods() *protoiface.Methods {
+	size := func(input protoiface.SizeInput) protoiface.SizeOutput {
+		x := input.Message.Interface().(*Bid)
+		if x == nil {
+			return protoiface.SizeOutput{
+				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+				Size:              0,
+			}
+		}
+		options := runtime.SizeInputToOptions(input)
+		_ = options
+		var n int
+		var l int
+		_ = l
+		l = len(x.Bidder)
+		if l > 0 {
+			n += 1 + l + runtime.Sov(uint64(l))
+		}
+		if x.Amount != 0 {
+			n += 1 + runtime.Sov(uint64(x.Amount))
+		}
+		if x.unknownFields != nil {
+			n += len(x.unknownFields)
+		}
+		return protoiface.SizeOutput{
+			NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+			Size:              n,
+		}
+	}
+
+	marshal := func(input protoiface.MarshalInput) (protoiface.MarshalOutput, error) {
+		x := input.Message.Interface().(*Bid)
+		if x == nil {
+			return protoiface.MarshalOutput{
+				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+				Buf:               input.Buf,
+			}, nil
+		}
+		options := runtime.MarshalInputToOptions(input)
+		_ = options
+		size := options.Size(x)
+		dAtA := make([]byte, size)
+		i := len(dAtA)
+		_ = i
+		var l int
+		_ = l
+		if x.unknownFields != nil {
+			i -= len(x.unknownFields)
+			copy(dAtA[i:], x.unknownFields)
+		}
+		if x.Amount != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.Amount))
+			i--
+			dAtA[i] = 0x10
+		}
+		if len(x.Bidder) > 0 {
+			i -= len(x.Bidder)
+			copy(dAtA[i:], x.Bidder)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Bidder)))
+			i--
+			dAtA[i] = 0xa
+		}
+		if input.Buf != nil {
+			input.Buf = append(input.Buf, dAtA...)
+		} else {
+			input.Buf = dAtA
+		}
+		return protoiface.MarshalOutput{
+			NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+			Buf:               input.Buf,
+		}, nil
+	}
+	unmarshal := func(input protoiface.UnmarshalInput) (protoiface.UnmarshalOutput, error) {
+		x := input.Message.Interface().(*Bid)
+		if x == nil {
+			return protoiface.UnmarshalOutput{
+				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+				Flags:             input.Flags,
+			}, nil
+		}
+		options := runtime.UnmarshalInputToOptions(input)
+		_ = options
+		dAtA := input.Buf
+		l := len(dAtA)
+		iNdEx := 0
+		for iNdEx < l {
+			preIndex := iNdEx
+			var wire uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				wire |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			fieldNum := int32(wire >> 3)
+			wireType := int(wire & 0x7)
+			if wireType == 4 {
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: Bid: wiretype end group for non-group")
+			}
+			if fieldNum <= 0 {
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: Bid: illegal tag %d (wire type %d)", fieldNum, wire)
+			}
+			switch fieldNum {
+			case 1:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Bidder", wireType)
+				}
+				var stringLen uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					stringLen |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				intStringLen := int(stringLen)
+				if intStringLen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + intStringLen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.Bidder = string(dAtA[iNdEx:postIndex])
+				iNdEx = postIndex
+			case 2:
+				if wireType != 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Amount", wireType)
+				}
+				x.Amount = 0
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					x.Amount |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+			default:
+				iNdEx = preIndex
+				skippy, err := runtime.Skip(dAtA[iNdEx:])
+				if err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
+				if (skippy < 0) || (iNdEx+skippy) < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if (iNdEx + skippy) > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				if !options.DiscardUnknown {
+					x.unknownFields = append(x.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
+				}
+				iNdEx += skippy
+			}
+		}
+
+		if iNdEx > l {
+			return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+		}
+		return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, nil
+	}
+	return &protoiface.Methods{
+		NoUnkeyedLiterals: struct{}{},
+		Flags:             protoiface.SupportMarshalDeterministic | protoiface.SupportUnmarshalDiscardUnknown,
+		Size:              size,
+		Marshal:           marshal,
+		Unmarshal:         unmarshal,
+		Merge:             nil,
+		CheckInitialized:  nil,
+	}
+}
+
+var _ protoreflect.List = (*_Auction_10_list)(nil)
+
+type _Auction_10_list struct {
+	list *[]*Bid
+}
+
+func (x *_Auction_10_list) Len() int {
+	if x.list == nil {
+		return 0
+	}
+	return len(*x.list)
+}
+
+func (x *_Auction_10_list) Get(i int) protoreflect.Value {
+	return protoreflect.ValueOfMessage((*x.list)[i].ProtoReflect())
+}
+
+func (x *_Auction_10_list) Set(i int, value protoreflect.Value) {
+	valueUnwrapped := value.Message()
+	concreteValue := valueUnwrapped.Interface().(*Bid)
+	(*x.list)[i] = concreteValue
+}
+
+func (x *_Auction_10_list) Append(value protoreflect.Value) {
+	valueUnwrapped := value.Message()
+	concreteValue := valueUnwrapped.Interface().(*Bid)
+	*x.list = append(*x.list, concreteValue)
+}
+
+func (x *_Auction_10_list) AppendMutable() protoreflect.Value {
+	v := new(Bid)
+	*x.list = append(*x.list, v)
+	return protoreflect.ValueOfMessage(v.ProtoReflect())
+}
+
+func (x *_Auction_10_list) Truncate(n int) {
+	for i := n; i < len(*x.list); i++ {
+		(*x.list)[i] = nil
+	}
+	*x.list = (*x.list)[:n]
+}
+
+func (x *_Auction_10_list) NewElement() protoreflect.Value {
+	v := new(Bid)
+	return protoreflect.ValueOfMessage(v.ProtoReflect())
+}
+
+func (x *_Auction_10_list) IsValid() bool {
+	return x.list != nil
+}
 
 var (
 	md_Auction               protoreflect.MessageDescriptor
@@ -23,6 +543,10 @@ var (
 	fd_Auction_status        protoreflect.FieldDescriptor
 	fd_Auction_owner         protoreflect.FieldDescriptor
 	fd_Auction_salePrice     protoreflect.FieldDescriptor
+	fd_Auction_endtime       protoreflect.FieldDescriptor
+	fd_Auction_bids          protoreflect.FieldDescriptor
+	fd_Auction_highestBidder protoreflect.FieldDescriptor
+	fd_Auction_highestBid    protoreflect.FieldDescriptor
 )
 
 func init() {
@@ -36,6 +560,10 @@ func init() {
 	fd_Auction_status = md_Auction.Fields().ByName("status")
 	fd_Auction_owner = md_Auction.Fields().ByName("owner")
 	fd_Auction_salePrice = md_Auction.Fields().ByName("salePrice")
+	fd_Auction_endtime = md_Auction.Fields().ByName("endtime")
+	fd_Auction_bids = md_Auction.Fields().ByName("bids")
+	fd_Auction_highestBidder = md_Auction.Fields().ByName("highestBidder")
+	fd_Auction_highestBid = md_Auction.Fields().ByName("highestBid")
 }
 
 var _ protoreflect.Message = (*fastReflection_Auction)(nil)
@@ -47,7 +575,7 @@ func (x *Auction) ProtoReflect() protoreflect.Message {
 }
 
 func (x *Auction) slowProtoReflect() protoreflect.Message {
-	mi := &file_cosa_cosa_auction_proto_msgTypes[0]
+	mi := &file_cosa_cosa_auction_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -151,6 +679,30 @@ func (x *fastReflection_Auction) Range(f func(protoreflect.FieldDescriptor, prot
 			return
 		}
 	}
+	if x.Endtime != nil {
+		value := protoreflect.ValueOfMessage(x.Endtime.ProtoReflect())
+		if !f(fd_Auction_endtime, value) {
+			return
+		}
+	}
+	if len(x.Bids) != 0 {
+		value := protoreflect.ValueOfList(&_Auction_10_list{list: &x.Bids})
+		if !f(fd_Auction_bids, value) {
+			return
+		}
+	}
+	if x.HighestBidder != "" {
+		value := protoreflect.ValueOfString(x.HighestBidder)
+		if !f(fd_Auction_highestBidder, value) {
+			return
+		}
+	}
+	if x.HighestBid != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.HighestBid)
+		if !f(fd_Auction_highestBid, value) {
+			return
+		}
+	}
 }
 
 // Has reports whether a field is populated.
@@ -182,6 +734,14 @@ func (x *fastReflection_Auction) Has(fd protoreflect.FieldDescriptor) bool {
 		return x.Owner != ""
 	case "cosa.cosa.Auction.salePrice":
 		return x.SalePrice != uint64(0)
+	case "cosa.cosa.Auction.endtime":
+		return x.Endtime != nil
+	case "cosa.cosa.Auction.bids":
+		return len(x.Bids) != 0
+	case "cosa.cosa.Auction.highestBidder":
+		return x.HighestBidder != ""
+	case "cosa.cosa.Auction.highestBid":
+		return x.HighestBid != uint64(0)
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosa.cosa.Auction"))
@@ -214,6 +774,14 @@ func (x *fastReflection_Auction) Clear(fd protoreflect.FieldDescriptor) {
 		x.Owner = ""
 	case "cosa.cosa.Auction.salePrice":
 		x.SalePrice = uint64(0)
+	case "cosa.cosa.Auction.endtime":
+		x.Endtime = nil
+	case "cosa.cosa.Auction.bids":
+		x.Bids = nil
+	case "cosa.cosa.Auction.highestBidder":
+		x.HighestBidder = ""
+	case "cosa.cosa.Auction.highestBid":
+		x.HighestBid = uint64(0)
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosa.cosa.Auction"))
@@ -254,6 +822,21 @@ func (x *fastReflection_Auction) Get(descriptor protoreflect.FieldDescriptor) pr
 	case "cosa.cosa.Auction.salePrice":
 		value := x.SalePrice
 		return protoreflect.ValueOfUint64(value)
+	case "cosa.cosa.Auction.endtime":
+		value := x.Endtime
+		return protoreflect.ValueOfMessage(value.ProtoReflect())
+	case "cosa.cosa.Auction.bids":
+		if len(x.Bids) == 0 {
+			return protoreflect.ValueOfList(&_Auction_10_list{})
+		}
+		listValue := &_Auction_10_list{list: &x.Bids}
+		return protoreflect.ValueOfList(listValue)
+	case "cosa.cosa.Auction.highestBidder":
+		value := x.HighestBidder
+		return protoreflect.ValueOfString(value)
+	case "cosa.cosa.Auction.highestBid":
+		value := x.HighestBid
+		return protoreflect.ValueOfUint64(value)
 	default:
 		if descriptor.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosa.cosa.Auction"))
@@ -290,6 +873,16 @@ func (x *fastReflection_Auction) Set(fd protoreflect.FieldDescriptor, value prot
 		x.Owner = value.Interface().(string)
 	case "cosa.cosa.Auction.salePrice":
 		x.SalePrice = value.Uint()
+	case "cosa.cosa.Auction.endtime":
+		x.Endtime = value.Message().Interface().(*timestamppb.Timestamp)
+	case "cosa.cosa.Auction.bids":
+		lv := value.List()
+		clv := lv.(*_Auction_10_list)
+		x.Bids = *clv.list
+	case "cosa.cosa.Auction.highestBidder":
+		x.HighestBidder = value.Interface().(string)
+	case "cosa.cosa.Auction.highestBid":
+		x.HighestBid = value.Uint()
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosa.cosa.Auction"))
@@ -310,6 +903,17 @@ func (x *fastReflection_Auction) Set(fd protoreflect.FieldDescriptor, value prot
 // Mutable is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_Auction) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
+	case "cosa.cosa.Auction.endtime":
+		if x.Endtime == nil {
+			x.Endtime = new(timestamppb.Timestamp)
+		}
+		return protoreflect.ValueOfMessage(x.Endtime.ProtoReflect())
+	case "cosa.cosa.Auction.bids":
+		if x.Bids == nil {
+			x.Bids = []*Bid{}
+		}
+		value := &_Auction_10_list{list: &x.Bids}
+		return protoreflect.ValueOfList(value)
 	case "cosa.cosa.Auction.item":
 		panic(fmt.Errorf("field item of message cosa.cosa.Auction is not mutable"))
 	case "cosa.cosa.Auction.creator":
@@ -326,6 +930,10 @@ func (x *fastReflection_Auction) Mutable(fd protoreflect.FieldDescriptor) protor
 		panic(fmt.Errorf("field owner of message cosa.cosa.Auction is not mutable"))
 	case "cosa.cosa.Auction.salePrice":
 		panic(fmt.Errorf("field salePrice of message cosa.cosa.Auction is not mutable"))
+	case "cosa.cosa.Auction.highestBidder":
+		panic(fmt.Errorf("field highestBidder of message cosa.cosa.Auction is not mutable"))
+	case "cosa.cosa.Auction.highestBid":
+		panic(fmt.Errorf("field highestBid of message cosa.cosa.Auction is not mutable"))
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosa.cosa.Auction"))
@@ -354,6 +962,16 @@ func (x *fastReflection_Auction) NewField(fd protoreflect.FieldDescriptor) proto
 	case "cosa.cosa.Auction.owner":
 		return protoreflect.ValueOfString("")
 	case "cosa.cosa.Auction.salePrice":
+		return protoreflect.ValueOfUint64(uint64(0))
+	case "cosa.cosa.Auction.endtime":
+		m := new(timestamppb.Timestamp)
+		return protoreflect.ValueOfMessage(m.ProtoReflect())
+	case "cosa.cosa.Auction.bids":
+		list := []*Bid{}
+		return protoreflect.ValueOfList(&_Auction_10_list{list: &list})
+	case "cosa.cosa.Auction.highestBidder":
+		return protoreflect.ValueOfString("")
+	case "cosa.cosa.Auction.highestBid":
 		return protoreflect.ValueOfUint64(uint64(0))
 	default:
 		if fd.IsExtension() {
@@ -452,6 +1070,23 @@ func (x *fastReflection_Auction) ProtoMethods() *protoiface.Methods {
 		if x.SalePrice != 0 {
 			n += 1 + runtime.Sov(uint64(x.SalePrice))
 		}
+		if x.Endtime != nil {
+			l = options.Size(x.Endtime)
+			n += 1 + l + runtime.Sov(uint64(l))
+		}
+		if len(x.Bids) > 0 {
+			for _, e := range x.Bids {
+				l = options.Size(e)
+				n += 1 + l + runtime.Sov(uint64(l))
+			}
+		}
+		l = len(x.HighestBidder)
+		if l > 0 {
+			n += 1 + l + runtime.Sov(uint64(l))
+		}
+		if x.HighestBid != 0 {
+			n += 1 + runtime.Sov(uint64(x.HighestBid))
+		}
 		if x.unknownFields != nil {
 			n += len(x.unknownFields)
 		}
@@ -480,6 +1115,48 @@ func (x *fastReflection_Auction) ProtoMethods() *protoiface.Methods {
 		if x.unknownFields != nil {
 			i -= len(x.unknownFields)
 			copy(dAtA[i:], x.unknownFields)
+		}
+		if x.HighestBid != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.HighestBid))
+			i--
+			dAtA[i] = 0x60
+		}
+		if len(x.HighestBidder) > 0 {
+			i -= len(x.HighestBidder)
+			copy(dAtA[i:], x.HighestBidder)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.HighestBidder)))
+			i--
+			dAtA[i] = 0x5a
+		}
+		if len(x.Bids) > 0 {
+			for iNdEx := len(x.Bids) - 1; iNdEx >= 0; iNdEx-- {
+				encoded, err := options.Marshal(x.Bids[iNdEx])
+				if err != nil {
+					return protoiface.MarshalOutput{
+						NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+						Buf:               input.Buf,
+					}, err
+				}
+				i -= len(encoded)
+				copy(dAtA[i:], encoded)
+				i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
+				i--
+				dAtA[i] = 0x52
+			}
+		}
+		if x.Endtime != nil {
+			encoded, err := options.Marshal(x.Endtime)
+			if err != nil {
+				return protoiface.MarshalOutput{
+					NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+					Buf:               input.Buf,
+				}, err
+			}
+			i -= len(encoded)
+			copy(dAtA[i:], encoded)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
+			i--
+			dAtA[i] = 0x4a
 		}
 		if x.SalePrice != 0 {
 			i = runtime.EncodeVarint(dAtA, i, uint64(x.SalePrice))
@@ -782,6 +1459,127 @@ func (x *fastReflection_Auction) ProtoMethods() *protoiface.Methods {
 						break
 					}
 				}
+			case 9:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Endtime", wireType)
+				}
+				var msglen int
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					msglen |= int(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				if msglen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + msglen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				if x.Endtime == nil {
+					x.Endtime = &timestamppb.Timestamp{}
+				}
+				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.Endtime); err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
+				iNdEx = postIndex
+			case 10:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Bids", wireType)
+				}
+				var msglen int
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					msglen |= int(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				if msglen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + msglen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.Bids = append(x.Bids, &Bid{})
+				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.Bids[len(x.Bids)-1]); err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
+				iNdEx = postIndex
+			case 11:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field HighestBidder", wireType)
+				}
+				var stringLen uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					stringLen |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				intStringLen := int(stringLen)
+				if intStringLen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + intStringLen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.HighestBidder = string(dAtA[iNdEx:postIndex])
+				iNdEx = postIndex
+			case 12:
+				if wireType != 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field HighestBid", wireType)
+				}
+				x.HighestBid = 0
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					x.HighestBid |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
 			default:
 				iNdEx = preIndex
 				skippy, err := runtime.Skip(dAtA[iNdEx:])
@@ -830,25 +1628,72 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type Bid struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Bidder string `protobuf:"bytes,1,opt,name=bidder,proto3" json:"bidder,omitempty"`
+	Amount uint64 `protobuf:"varint,2,opt,name=amount,proto3" json:"amount,omitempty"`
+}
+
+func (x *Bid) Reset() {
+	*x = Bid{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_cosa_cosa_auction_proto_msgTypes[0]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Bid) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Bid) ProtoMessage() {}
+
+// Deprecated: Use Bid.ProtoReflect.Descriptor instead.
+func (*Bid) Descriptor() ([]byte, []int) {
+	return file_cosa_cosa_auction_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *Bid) GetBidder() string {
+	if x != nil {
+		return x.Bidder
+	}
+	return ""
+}
+
+func (x *Bid) GetAmount() uint64 {
+	if x != nil {
+		return x.Amount
+	}
+	return 0
+}
+
 type Auction struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Item          string `protobuf:"bytes,1,opt,name=item,proto3" json:"item,omitempty"`
-	Creator       string `protobuf:"bytes,2,opt,name=creator,proto3" json:"creator,omitempty"`
-	Id            uint64 `protobuf:"varint,3,opt,name=id,proto3" json:"id,omitempty"`
-	StartingPrice uint64 `protobuf:"varint,4,opt,name=startingPrice,proto3" json:"startingPrice,omitempty"`
-	Duration      uint64 `protobuf:"varint,5,opt,name=duration,proto3" json:"duration,omitempty"`
-	Status        string `protobuf:"bytes,6,opt,name=status,proto3" json:"status,omitempty"`
-	Owner         string `protobuf:"bytes,7,opt,name=owner,proto3" json:"owner,omitempty"`
-	SalePrice     uint64 `protobuf:"varint,8,opt,name=salePrice,proto3" json:"salePrice,omitempty"`
+	Item          string                 `protobuf:"bytes,1,opt,name=item,proto3" json:"item,omitempty"`
+	Creator       string                 `protobuf:"bytes,2,opt,name=creator,proto3" json:"creator,omitempty"`
+	Id            uint64                 `protobuf:"varint,3,opt,name=id,proto3" json:"id,omitempty"`
+	StartingPrice uint64                 `protobuf:"varint,4,opt,name=startingPrice,proto3" json:"startingPrice,omitempty"`
+	Duration      uint64                 `protobuf:"varint,5,opt,name=duration,proto3" json:"duration,omitempty"`
+	Status        string                 `protobuf:"bytes,6,opt,name=status,proto3" json:"status,omitempty"`
+	Owner         string                 `protobuf:"bytes,7,opt,name=owner,proto3" json:"owner,omitempty"`
+	SalePrice     uint64                 `protobuf:"varint,8,opt,name=salePrice,proto3" json:"salePrice,omitempty"`
+	Endtime       *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=endtime,proto3" json:"endtime,omitempty"`
+	Bids          []*Bid                 `protobuf:"bytes,10,rep,name=bids,proto3" json:"bids,omitempty"`
+	HighestBidder string                 `protobuf:"bytes,11,opt,name=highestBidder,proto3" json:"highestBidder,omitempty"`
+	HighestBid    uint64                 `protobuf:"varint,12,opt,name=highestBid,proto3" json:"highestBid,omitempty"`
 }
 
 func (x *Auction) Reset() {
 	*x = Auction{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_cosa_cosa_auction_proto_msgTypes[0]
+		mi := &file_cosa_cosa_auction_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -862,7 +1707,7 @@ func (*Auction) ProtoMessage() {}
 
 // Deprecated: Use Auction.ProtoReflect.Descriptor instead.
 func (*Auction) Descriptor() ([]byte, []int) {
-	return file_cosa_cosa_auction_proto_rawDescGZIP(), []int{0}
+	return file_cosa_cosa_auction_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *Auction) GetItem() string {
@@ -921,34 +1766,77 @@ func (x *Auction) GetSalePrice() uint64 {
 	return 0
 }
 
+func (x *Auction) GetEndtime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.Endtime
+	}
+	return nil
+}
+
+func (x *Auction) GetBids() []*Bid {
+	if x != nil {
+		return x.Bids
+	}
+	return nil
+}
+
+func (x *Auction) GetHighestBidder() string {
+	if x != nil {
+		return x.HighestBidder
+	}
+	return ""
+}
+
+func (x *Auction) GetHighestBid() uint64 {
+	if x != nil {
+		return x.HighestBid
+	}
+	return 0
+}
+
 var File_cosa_cosa_auction_proto protoreflect.FileDescriptor
 
 var file_cosa_cosa_auction_proto_rawDesc = []byte{
 	0x0a, 0x17, 0x63, 0x6f, 0x73, 0x61, 0x2f, 0x63, 0x6f, 0x73, 0x61, 0x2f, 0x61, 0x75, 0x63, 0x74,
 	0x69, 0x6f, 0x6e, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x09, 0x63, 0x6f, 0x73, 0x61, 0x2e,
-	0x63, 0x6f, 0x73, 0x61, 0x22, 0xd5, 0x01, 0x0a, 0x07, 0x41, 0x75, 0x63, 0x74, 0x69, 0x6f, 0x6e,
-	0x12, 0x12, 0x0a, 0x04, 0x69, 0x74, 0x65, 0x6d, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04,
-	0x69, 0x74, 0x65, 0x6d, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x18,
-	0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x12, 0x0e,
-	0x0a, 0x02, 0x69, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x04, 0x52, 0x02, 0x69, 0x64, 0x12, 0x24,
-	0x0a, 0x0d, 0x73, 0x74, 0x61, 0x72, 0x74, 0x69, 0x6e, 0x67, 0x50, 0x72, 0x69, 0x63, 0x65, 0x18,
-	0x04, 0x20, 0x01, 0x28, 0x04, 0x52, 0x0d, 0x73, 0x74, 0x61, 0x72, 0x74, 0x69, 0x6e, 0x67, 0x50,
-	0x72, 0x69, 0x63, 0x65, 0x12, 0x1a, 0x0a, 0x08, 0x64, 0x75, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e,
-	0x18, 0x05, 0x20, 0x01, 0x28, 0x04, 0x52, 0x08, 0x64, 0x75, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e,
-	0x12, 0x16, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x06, 0x20, 0x01, 0x28, 0x09,
-	0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x14, 0x0a, 0x05, 0x6f, 0x77, 0x6e, 0x65,
-	0x72, 0x18, 0x07, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x6f, 0x77, 0x6e, 0x65, 0x72, 0x12, 0x1c,
-	0x0a, 0x09, 0x73, 0x61, 0x6c, 0x65, 0x50, 0x72, 0x69, 0x63, 0x65, 0x18, 0x08, 0x20, 0x01, 0x28,
-	0x04, 0x52, 0x09, 0x73, 0x61, 0x6c, 0x65, 0x50, 0x72, 0x69, 0x63, 0x65, 0x42, 0x7e, 0x0a, 0x0d,
-	0x63, 0x6f, 0x6d, 0x2e, 0x63, 0x6f, 0x73, 0x61, 0x2e, 0x63, 0x6f, 0x73, 0x61, 0x42, 0x0c, 0x41,
-	0x75, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x1a, 0x63,
-	0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x73, 0x64, 0x6b, 0x2e, 0x69, 0x6f, 0x2f, 0x61, 0x70, 0x69, 0x2f,
-	0x63, 0x6f, 0x73, 0x61, 0x2f, 0x63, 0x6f, 0x73, 0x61, 0xa2, 0x02, 0x03, 0x43, 0x43, 0x58, 0xaa,
-	0x02, 0x09, 0x43, 0x6f, 0x73, 0x61, 0x2e, 0x43, 0x6f, 0x73, 0x61, 0xca, 0x02, 0x09, 0x43, 0x6f,
-	0x73, 0x61, 0x5c, 0x43, 0x6f, 0x73, 0x61, 0xe2, 0x02, 0x15, 0x43, 0x6f, 0x73, 0x61, 0x5c, 0x43,
-	0x6f, 0x73, 0x61, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea,
-	0x02, 0x0a, 0x43, 0x6f, 0x73, 0x61, 0x3a, 0x3a, 0x43, 0x6f, 0x73, 0x61, 0x62, 0x06, 0x70, 0x72,
-	0x6f, 0x74, 0x6f, 0x33,
+	0x63, 0x6f, 0x73, 0x61, 0x1a, 0x1f, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2f, 0x70, 0x72, 0x6f,
+	0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x74, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x2e,
+	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x35, 0x0a, 0x03, 0x42, 0x69, 0x64, 0x12, 0x16, 0x0a, 0x06,
+	0x62, 0x69, 0x64, 0x64, 0x65, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x62, 0x69,
+	0x64, 0x64, 0x65, 0x72, 0x12, 0x16, 0x0a, 0x06, 0x61, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x02,
+	0x20, 0x01, 0x28, 0x04, 0x52, 0x06, 0x61, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x22, 0xf5, 0x02, 0x0a,
+	0x07, 0x41, 0x75, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x12, 0x0a, 0x04, 0x69, 0x74, 0x65, 0x6d,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x69, 0x74, 0x65, 0x6d, 0x12, 0x18, 0x0a, 0x07,
+	0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x63,
+	0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x03, 0x20, 0x01,
+	0x28, 0x04, 0x52, 0x02, 0x69, 0x64, 0x12, 0x24, 0x0a, 0x0d, 0x73, 0x74, 0x61, 0x72, 0x74, 0x69,
+	0x6e, 0x67, 0x50, 0x72, 0x69, 0x63, 0x65, 0x18, 0x04, 0x20, 0x01, 0x28, 0x04, 0x52, 0x0d, 0x73,
+	0x74, 0x61, 0x72, 0x74, 0x69, 0x6e, 0x67, 0x50, 0x72, 0x69, 0x63, 0x65, 0x12, 0x1a, 0x0a, 0x08,
+	0x64, 0x75, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x05, 0x20, 0x01, 0x28, 0x04, 0x52, 0x08,
+	0x64, 0x75, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74,
+	0x75, 0x73, 0x18, 0x06, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73,
+	0x12, 0x14, 0x0a, 0x05, 0x6f, 0x77, 0x6e, 0x65, 0x72, 0x18, 0x07, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x05, 0x6f, 0x77, 0x6e, 0x65, 0x72, 0x12, 0x1c, 0x0a, 0x09, 0x73, 0x61, 0x6c, 0x65, 0x50, 0x72,
+	0x69, 0x63, 0x65, 0x18, 0x08, 0x20, 0x01, 0x28, 0x04, 0x52, 0x09, 0x73, 0x61, 0x6c, 0x65, 0x50,
+	0x72, 0x69, 0x63, 0x65, 0x12, 0x34, 0x0a, 0x07, 0x65, 0x6e, 0x64, 0x74, 0x69, 0x6d, 0x65, 0x18,
+	0x09, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70,
+	0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x54, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d,
+	0x70, 0x52, 0x07, 0x65, 0x6e, 0x64, 0x74, 0x69, 0x6d, 0x65, 0x12, 0x22, 0x0a, 0x04, 0x62, 0x69,
+	0x64, 0x73, 0x18, 0x0a, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x0e, 0x2e, 0x63, 0x6f, 0x73, 0x61, 0x2e,
+	0x63, 0x6f, 0x73, 0x61, 0x2e, 0x42, 0x69, 0x64, 0x52, 0x04, 0x62, 0x69, 0x64, 0x73, 0x12, 0x24,
+	0x0a, 0x0d, 0x68, 0x69, 0x67, 0x68, 0x65, 0x73, 0x74, 0x42, 0x69, 0x64, 0x64, 0x65, 0x72, 0x18,
+	0x0b, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0d, 0x68, 0x69, 0x67, 0x68, 0x65, 0x73, 0x74, 0x42, 0x69,
+	0x64, 0x64, 0x65, 0x72, 0x12, 0x1e, 0x0a, 0x0a, 0x68, 0x69, 0x67, 0x68, 0x65, 0x73, 0x74, 0x42,
+	0x69, 0x64, 0x18, 0x0c, 0x20, 0x01, 0x28, 0x04, 0x52, 0x0a, 0x68, 0x69, 0x67, 0x68, 0x65, 0x73,
+	0x74, 0x42, 0x69, 0x64, 0x42, 0x7e, 0x0a, 0x0d, 0x63, 0x6f, 0x6d, 0x2e, 0x63, 0x6f, 0x73, 0x61,
+	0x2e, 0x63, 0x6f, 0x73, 0x61, 0x42, 0x0c, 0x41, 0x75, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x72,
+	0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x1a, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x73, 0x64, 0x6b,
+	0x2e, 0x69, 0x6f, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x63, 0x6f, 0x73, 0x61, 0x2f, 0x63, 0x6f, 0x73,
+	0x61, 0xa2, 0x02, 0x03, 0x43, 0x43, 0x58, 0xaa, 0x02, 0x09, 0x43, 0x6f, 0x73, 0x61, 0x2e, 0x43,
+	0x6f, 0x73, 0x61, 0xca, 0x02, 0x09, 0x43, 0x6f, 0x73, 0x61, 0x5c, 0x43, 0x6f, 0x73, 0x61, 0xe2,
+	0x02, 0x15, 0x43, 0x6f, 0x73, 0x61, 0x5c, 0x43, 0x6f, 0x73, 0x61, 0x5c, 0x47, 0x50, 0x42, 0x4d,
+	0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x0a, 0x43, 0x6f, 0x73, 0x61, 0x3a, 0x3a,
+	0x43, 0x6f, 0x73, 0x61, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -963,16 +1851,20 @@ func file_cosa_cosa_auction_proto_rawDescGZIP() []byte {
 	return file_cosa_cosa_auction_proto_rawDescData
 }
 
-var file_cosa_cosa_auction_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+var file_cosa_cosa_auction_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_cosa_cosa_auction_proto_goTypes = []interface{}{
-	(*Auction)(nil), // 0: cosa.cosa.Auction
+	(*Bid)(nil),                   // 0: cosa.cosa.Bid
+	(*Auction)(nil),               // 1: cosa.cosa.Auction
+	(*timestamppb.Timestamp)(nil), // 2: google.protobuf.Timestamp
 }
 var file_cosa_cosa_auction_proto_depIdxs = []int32{
-	0, // [0:0] is the sub-list for method output_type
-	0, // [0:0] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	2, // 0: cosa.cosa.Auction.endtime:type_name -> google.protobuf.Timestamp
+	0, // 1: cosa.cosa.Auction.bids:type_name -> cosa.cosa.Bid
+	2, // [2:2] is the sub-list for method output_type
+	2, // [2:2] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_cosa_cosa_auction_proto_init() }
@@ -982,6 +1874,18 @@ func file_cosa_cosa_auction_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_cosa_cosa_auction_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Bid); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_cosa_cosa_auction_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Auction); i {
 			case 0:
 				return &v.state
@@ -1000,7 +1904,7 @@ func file_cosa_cosa_auction_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_cosa_cosa_auction_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   1,
+			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

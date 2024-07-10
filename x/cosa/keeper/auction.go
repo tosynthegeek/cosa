@@ -4,31 +4,34 @@ import (
 	"cosa/x/cosa/types"
 	"encoding/binary"
 
-	sdkerrors "cosmossdk.io/errors"
 	"cosmossdk.io/store/prefix"
 	"github.com/cosmos/cosmos-sdk/runtime"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	sdkerror "github.com/cosmos/cosmos-sdk/types/errors"
 )
 
-func (k Keeper) SetAuction(ctx sdk.Context, auction types.Auction) int {
-	count:= k.GetAuctionCount(ctx)
-	auction.Id = uint64(count)
-	storeAdapter:= runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
-	store:= prefix.NewStore(storeAdapter, types.KeyPrefix(types.StoreKey))
-	idBytes:= IDBytes(auction.Id)
-	auctionBytes:= k.cdc.MustMarshal(&auction)
+var Pending = "Pending"
+var Approved = "Approved"
+var Closed = "Closed"
 
+func (k Keeper) SetAuction(ctx sdk.Context, auction types.Auction) uint64 {
+	count := k.GetAuctionCount(ctx)
+	auction.Id = uint64(count)
+	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
+	store := prefix.NewStore(storeAdapter, types.KeyPrefix(types.StoreKey))
+	idBytes := IDBytes(auction.Id)
+	auctionBytes := k.cdc.MustMarshal(&auction)
 	store.Set(idBytes, auctionBytes)
+
+	k.SetAuctionCount(ctx, count+1)
 
 	return count
 }
 
 func (k Keeper) GetAuction(ctx sdk.Context, id uint64) (types.Auction, bool) {
-	idBytes:= IDBytes(id)
-	storeAdapter:= runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
-	store:= prefix.NewStore(storeAdapter, types.KeyPrefix(types.StoreKey))
-	auctionBytes:= store.Get(idBytes)
+	idBytes := IDBytes(id)
+	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
+	store := prefix.NewStore(storeAdapter, types.KeyPrefix(types.StoreKey))
+	auctionBytes := store.Get(idBytes)
 	if auctionBytes == nil {
 		return types.Auction{}, false
 	}
@@ -38,22 +41,20 @@ func (k Keeper) GetAuction(ctx sdk.Context, id uint64) (types.Auction, bool) {
 	return auction, true
 }
 
-func (k Keeper) UpdateAuction(ctx sdk.Context, auction types.Auction) error {
-	existingAuction, found:= k.GetAuction(ctx, auction.Id)
-	if !found {
-		return sdkerrors.Wrapf(sdkerror.ErrKeyNotFound, "auction %d doesnt exist", auction.Id)
-	}
+// func (k Keeper) UpdateAuction(ctx sdk.Context, auction types.Auction) error {
+// 	existingAuction, found := k.GetAuction(ctx, auction.Id)
+// 	if !found {
+// 		return sdkerrors.Wrapf(sdkerror.ErrKeyNotFound, "auction %d doesnt exist", auction.Id)
+// 	}
 
-	// Optional: Perform any necessary validations
-	// For example, you might want to prevent updates to certain fields
-	if auction.Creator != existingAuction.Creator {
-		return sdkerrors.Wrap(sdkerror.ErrUnauthorized, "cannot change bid creator")
-	}
+// 	if auction.Creator != existingAuction.Creator {
+// 		return sdkerrors.Wrap(sdkerror.ErrUnauthorized, "cannot change bid creator")
+// 	}
 
-	k.SetAuction(ctx, auction)
+// 	k.SetAuction(ctx, auction)
 
-	return nil
-}
+// 	return nil
+// }
 
 func (k Keeper) GetAllAuctions(ctx sdk.Context) []types.Auction {
 	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
@@ -70,21 +71,24 @@ func (k Keeper) GetAllAuctions(ctx sdk.Context) []types.Auction {
 	}
 
 	return auctions
-} 
+}
 
-func (k Keeper) GetAuctionCount(ctx sdk.Context) int {
+func (k Keeper) GetAuctionCount(ctx sdk.Context) uint64 {
 	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
-	store := prefix.NewStore(storeAdapter, types.KeyPrefix(types.StoreKey))
-
-	iterator := store.Iterator(nil, nil)
-	defer iterator.Close()
-
-	count := 0
-	for ; iterator.Valid(); iterator.Next() {
-		count++
+	store := prefix.NewStore(storeAdapter, types.KeyPrefix(types.AuctionCountKey))
+	countBytes := store.Get(types.KeyPrefix(types.AuctionCountKey))
+	if countBytes == nil {
+		return 0
 	}
+	return binary.BigEndian.Uint64(countBytes)
+}
 
-	return count
+func (k Keeper) SetAuctionCount(ctx sdk.Context, count uint64) {
+	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
+	store := prefix.NewStore(storeAdapter, types.KeyPrefix(types.AuctionCountKey))
+	countBytes := make([]byte, 8)
+	binary.BigEndian.PutUint64(countBytes, count)
+	store.Set(types.KeyPrefix(types.AuctionCountKey), countBytes)
 }
 
 func IDBytes(id uint64) []byte {

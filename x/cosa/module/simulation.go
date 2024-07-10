@@ -27,6 +27,14 @@ const (
 	// TODO: Determine the simulation weight value
 	defaultWeightMsgCreateAuction int = 100
 
+	opWeightMsgApproveAuction = "op_weight_msg_approve_auction"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgApproveAuction int = 100
+
+	opWeightMsgCreatBid = "op_weight_msg_creat_bid"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgCreatBid int = 100
+
 	// this line is used by starport scaffolding # simapp/module/const
 )
 
@@ -61,6 +69,28 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 		cosasimulation.SimulateMsgCreateAuction(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
+	var weightMsgApproveAuction int
+	simState.AppParams.GetOrGenerate(opWeightMsgApproveAuction, &weightMsgApproveAuction, nil,
+		func(_ *rand.Rand) {
+			weightMsgApproveAuction = defaultWeightMsgApproveAuction
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgApproveAuction,
+		cosasimulation.SimulateMsgApproveAuction(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
+	var weightMsgCreatBid int
+	simState.AppParams.GetOrGenerate(opWeightMsgCreatBid, &weightMsgCreatBid, nil,
+		func(_ *rand.Rand) {
+			weightMsgCreatBid = defaultWeightMsgCreatBid
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgCreatBid,
+		cosasimulation.SimulateMsgCreatBid(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
 	// this line is used by starport scaffolding # simapp/module/operation
 
 	return operations
@@ -74,6 +104,22 @@ func (am AppModule) ProposalMsgs(simState module.SimulationState) []simtypes.Wei
 			defaultWeightMsgCreateAuction,
 			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
 				cosasimulation.SimulateMsgCreateAuction(am.accountKeeper, am.bankKeeper, am.keeper)
+				return nil
+			},
+		),
+		simulation.NewWeightedProposalMsg(
+			opWeightMsgApproveAuction,
+			defaultWeightMsgApproveAuction,
+			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
+				cosasimulation.SimulateMsgApproveAuction(am.accountKeeper, am.bankKeeper, am.keeper)
+				return nil
+			},
+		),
+		simulation.NewWeightedProposalMsg(
+			opWeightMsgCreatBid,
+			defaultWeightMsgCreatBid,
+			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
+				cosasimulation.SimulateMsgCreatBid(am.accountKeeper, am.bankKeeper, am.keeper)
 				return nil
 			},
 		),

@@ -2,25 +2,27 @@ package keeper
 
 import (
 	"context"
+	"fmt"
+	"time"
 
 	"cosa/x/cosa/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	"google.golang.org/protobuf/types/known/timestamppb"
 )
-
-var Pending = "Pending"
-var Approved = "Approved"
-var Closed = "Closed"
 
 func (k msgServer) CreateAuction(goCtx context.Context, msg *types.MsgCreateAuction) (*types.MsgCreateAuctionResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
+	endtime := ctx.BlockTime().Add(time.Duration(msg.Duration) * time.Second)
+	fmt.Printf("endtime: %v\n", endtime)
 
-	auction:= types.Auction {
-		Item: msg.Item,
-		Creator: msg.Creator,
+	auction := types.Auction{
+		Item:          msg.Item,
+		Creator:       msg.Creator,
 		StartingPrice: msg.StartingPrice,
-		Duration: msg.Duration,
-		Status: Pending,
+		Duration:      msg.Duration,
+		Endtime: 	   timestamppb.New(endtime),	
+		Status:        Pending,
 	}
 
 	k.SetAuction(ctx, auction)

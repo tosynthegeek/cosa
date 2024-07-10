@@ -34,6 +34,18 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Short:          "Send a createAuction tx",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "item"}, {ProtoField: "startingPrice"}, {ProtoField: "duration"}, {ProtoField: "status"}},
 				},
+				{
+					RpcMethod:      "ApproveAuction",
+					Use:            "approve-auction [item] [id] [starting-price]",
+					Short:          "Send a approveAuction tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "item"}, {ProtoField: "id"}, {ProtoField: "startingPrice"}},
+				},
+				{
+					RpcMethod:      "CreatBid",
+					Use:            "creat-bid [item] [auction-id] [bid-amount] [bidder]",
+					Short:          "Send a creatBid tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "item"}, {ProtoField: "auctionId"}, {ProtoField: "bidAmount"}, {ProtoField: "bidder"}},
+				},
 				// this line is used by ignite scaffolding # autocli/tx
 			},
 		},

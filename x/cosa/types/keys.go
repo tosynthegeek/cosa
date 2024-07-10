@@ -7,6 +7,8 @@ const (
 	// StoreKey defines the primary module store key
 	StoreKey = ModuleName
 
+	AuctionCountKey = "cosa/count"
+
 	// MemStoreKey defines the in-memory store key
 	MemStoreKey = "mem_cosa"
 )

@@ -40,6 +40,105 @@ paths:
                   additionalProperties: {}
       tags:
         - Query
+  /cosa.cosa.Msg/ApproveAuction:
+    post:
+      operationId: CosaCosaMsg_ApproveAuction
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              creator:
+                type: string
+              item:
+                type: string
+              id:
+                type: string
+                format: uint64
+              startingPrice:
+                type: string
+                format: uint64
+      tags:
+        - Msg
+  /cosa.cosa.Msg/CreatBid:
+    post:
+      operationId: CosaCosaMsg_CreatBid
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+                format: uint64
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              creator:
+                type: string
+              item:
+                type: string
+              auctionId:
+                type: string
+                format: uint64
+              bidAmount:
+                type: string
+                format: uint64
+              bidder:
+                type: string
+      tags:
+        - Msg
   /cosa.cosa.Msg/CreateAuction:
     post:
       operationId: CosaCosaMsg_CreateAuction
@@ -16705,6 +16804,45 @@ definitions:
         description: params holds all the parameters of this module.
         type: object
     description: QueryParamsResponse is response type for the Query/Params RPC method.
+  cosa.cosa.MsgApproveAuction:
+    type: object
+    properties:
+      creator:
+        type: string
+      item:
+        type: string
+      id:
+        type: string
+        format: uint64
+      startingPrice:
+        type: string
+        format: uint64
+  cosa.cosa.MsgApproveAuctionResponse:
+    type: object
+    properties:
+      status:
+        type: string
+  cosa.cosa.MsgCreatBid:
+    type: object
+    properties:
+      creator:
+        type: string
+      item:
+        type: string
+      auctionId:
+        type: string
+        format: uint64
+      bidAmount:
+        type: string
+        format: uint64
+      bidder:
+        type: string
+  cosa.cosa.MsgCreatBidResponse:
+    type: object
+    properties:
+      id:
+        type: string
+        format: uint64
   cosa.cosa.MsgCreateAuction:
     type: object
     properties:
