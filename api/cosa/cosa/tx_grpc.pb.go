@@ -8,7 +8,6 @@ package cosa
 
 import (
 	context "context"
-
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -24,6 +23,7 @@ const (
 	Msg_CreateAuction_FullMethodName  = "/cosa.cosa.Msg/CreateAuction"
 	Msg_ApproveAuction_FullMethodName = "/cosa.cosa.Msg/ApproveAuction"
 	Msg_CreatBid_FullMethodName       = "/cosa.cosa.Msg/CreatBid"
+	Msg_CloseAuction_FullMethodName   = "/cosa.cosa.Msg/CloseAuction"
 )
 
 // MsgClient is the client API for Msg service.
@@ -36,6 +36,7 @@ type MsgClient interface {
 	CreateAuction(ctx context.Context, in *MsgCreateAuction, opts ...grpc.CallOption) (*MsgCreateAuctionResponse, error)
 	ApproveAuction(ctx context.Context, in *MsgApproveAuction, opts ...grpc.CallOption) (*MsgApproveAuctionResponse, error)
 	CreatBid(ctx context.Context, in *MsgCreatBid, opts ...grpc.CallOption) (*MsgCreatBidResponse, error)
+	CloseAuction(ctx context.Context, in *MsgCloseAuction, opts ...grpc.CallOption) (*MsgCloseAuctionResponse, error)
 }
 
 type msgClient struct {
@@ -82,6 +83,15 @@ func (c *msgClient) CreatBid(ctx context.Context, in *MsgCreatBid, opts ...grpc.
 	return out, nil
 }
 
+func (c *msgClient) CloseAuction(ctx context.Context, in *MsgCloseAuction, opts ...grpc.CallOption) (*MsgCloseAuctionResponse, error) {
+	out := new(MsgCloseAuctionResponse)
+	err := c.cc.Invoke(ctx, Msg_CloseAuction_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MsgServer is the server API for Msg service.
 // All implementations must embed UnimplementedMsgServer
 // for forward compatibility
@@ -92,6 +102,7 @@ type MsgServer interface {
 	CreateAuction(context.Context, *MsgCreateAuction) (*MsgCreateAuctionResponse, error)
 	ApproveAuction(context.Context, *MsgApproveAuction) (*MsgApproveAuctionResponse, error)
 	CreatBid(context.Context, *MsgCreatBid) (*MsgCreatBidResponse, error)
+	CloseAuction(context.Context, *MsgCloseAuction) (*MsgCloseAuctionResponse, error)
 	mustEmbedUnimplementedMsgServer()
 }
 
@@ -110,6 +121,9 @@ func (UnimplementedMsgServer) ApproveAuction(context.Context, *MsgApproveAuction
 }
 func (UnimplementedMsgServer) CreatBid(context.Context, *MsgCreatBid) (*MsgCreatBidResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreatBid not implemented")
+}
+func (UnimplementedMsgServer) CloseAuction(context.Context, *MsgCloseAuction) (*MsgCloseAuctionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CloseAuction not implemented")
 }
 func (UnimplementedMsgServer) mustEmbedUnimplementedMsgServer() {}
 
@@ -196,6 +210,24 @@ func _Msg_CreatBid_Handler(srv interface{}, ctx context.Context, dec func(interf
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Msg_CloseAuction_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgCloseAuction)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).CloseAuction(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Msg_CloseAuction_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).CloseAuction(ctx, req.(*MsgCloseAuction))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Msg_ServiceDesc is the grpc.ServiceDesc for Msg service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -218,6 +250,10 @@ var Msg_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreatBid",
 			Handler:    _Msg_CreatBid_Handler,
+		},
+		{
+			MethodName: "CloseAuction",
+			Handler:    _Msg_CloseAuction_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

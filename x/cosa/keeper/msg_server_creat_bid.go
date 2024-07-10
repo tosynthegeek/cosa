@@ -13,7 +13,7 @@ import (
 func (k msgServer) CreatBid(goCtx context.Context, msg *types.MsgCreatBid) (*types.MsgCreatBidResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	auction, found:= k.GetAuction(ctx, msg.AuctionId)
+	auction, found := k.GetAuction(ctx, msg.AuctionId)
 	if !found {
 		return nil, sdkerrors.Wrapf(sdkerror.ErrKeyNotFound, "auction %d doesnt exist", auction.Id)
 	}
@@ -26,7 +26,7 @@ func (k msgServer) CreatBid(goCtx context.Context, msg *types.MsgCreatBid) (*typ
 		return nil, sdkerrors.Wrap(sdkerror.ErrUnauthorized, "auction has ended")
 	}
 
-	bid:= types.Bid {
+	bid := types.Bid{
 		Bidder: msg.Bidder,
 		Amount: msg.BidAmount,
 	}

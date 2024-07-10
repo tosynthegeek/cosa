@@ -21,7 +21,7 @@ func (k msgServer) CreateAuction(goCtx context.Context, msg *types.MsgCreateAuct
 		Creator:       msg.Creator,
 		StartingPrice: msg.StartingPrice,
 		Duration:      msg.Duration,
-		Endtime: 	   timestamppb.New(endtime),	
+		Endtime:       timestamppb.New(endtime),
 		Status:        Pending,
 	}
 

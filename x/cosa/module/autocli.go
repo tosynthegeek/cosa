@@ -46,6 +46,12 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Short:          "Send a creatBid tx",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "item"}, {ProtoField: "auctionId"}, {ProtoField: "bidAmount"}, {ProtoField: "bidder"}},
 				},
+				{
+					RpcMethod:      "CloseAuction",
+					Use:            "close-auction [id] [highest-bid]",
+					Short:          "Send a closeAuction tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}, {ProtoField: "highestBid"}},
+				},
 				// this line is used by ignite scaffolding # autocli/tx
 			},
 		},

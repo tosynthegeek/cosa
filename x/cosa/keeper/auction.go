@@ -12,6 +12,7 @@ import (
 var Pending = "Pending"
 var Approved = "Approved"
 var Closed = "Closed"
+var Expired = "Expired"
 
 func (k Keeper) SetAuction(ctx sdk.Context, auction types.Auction) uint64 {
 	count := k.GetAuctionCount(ctx)
@@ -95,4 +96,21 @@ func IDBytes(id uint64) []byte {
 	bz := make([]byte, 8)
 	binary.BigEndian.PutUint64(bz, id)
 	return bz
+}
+
+func (k Keeper) Blocker (ctx sdk.Context) {
+	auctions:= k.GetAllAuctions(ctx)
+	for _, auction:= range auctions {
+		if auction.Status == Approved && ctx.BlockTime().After(auction.Endtime.AsTime()) {
+			if len(auction.Bids) > 0 {
+				auction.Status = Closed
+				auction.Owner = auction.HighestBidder
+				auction.SalePrice = auction.HighestBid
+			} else {
+				auction.Status = Expired
+			}
+			
+			k.SetAuction(ctx, auction)
+		}
+	}
 }

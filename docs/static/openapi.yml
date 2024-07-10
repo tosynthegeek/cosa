@@ -88,6 +88,52 @@ paths:
                 format: uint64
       tags:
         - Msg
+  /cosa.cosa.Msg/CloseAuction:
+    post:
+      operationId: CosaCosaMsg_CloseAuction
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              winner:
+                type: string
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              creator:
+                type: string
+              id:
+                type: string
+                format: uint64
+              highestBid:
+                type: string
+                format: uint64
+      tags:
+        - Msg
   /cosa.cosa.Msg/CreatBid:
     post:
       operationId: CosaCosaMsg_CreatBid
@@ -16821,6 +16867,22 @@ definitions:
     type: object
     properties:
       status:
+        type: string
+  cosa.cosa.MsgCloseAuction:
+    type: object
+    properties:
+      creator:
+        type: string
+      id:
+        type: string
+        format: uint64
+      highestBid:
+        type: string
+        format: uint64
+  cosa.cosa.MsgCloseAuctionResponse:
+    type: object
+    properties:
+      winner:
         type: string
   cosa.cosa.MsgCreatBid:
     type: object

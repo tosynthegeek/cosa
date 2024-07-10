@@ -35,6 +35,10 @@ const (
 	// TODO: Determine the simulation weight value
 	defaultWeightMsgCreatBid int = 100
 
+	opWeightMsgCloseAuction = "op_weight_msg_close_auction"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgCloseAuction int = 100
+
 	// this line is used by starport scaffolding # simapp/module/const
 )
 
@@ -91,6 +95,17 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 		cosasimulation.SimulateMsgCreatBid(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
+	var weightMsgCloseAuction int
+	simState.AppParams.GetOrGenerate(opWeightMsgCloseAuction, &weightMsgCloseAuction, nil,
+		func(_ *rand.Rand) {
+			weightMsgCloseAuction = defaultWeightMsgCloseAuction
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgCloseAuction,
+		cosasimulation.SimulateMsgCloseAuction(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
 	// this line is used by starport scaffolding # simapp/module/operation
 
 	return operations
@@ -120,6 +135,14 @@ func (am AppModule) ProposalMsgs(simState module.SimulationState) []simtypes.Wei
 			defaultWeightMsgCreatBid,
 			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
 				cosasimulation.SimulateMsgCreatBid(am.accountKeeper, am.bankKeeper, am.keeper)
+				return nil
+			},
+		),
+		simulation.NewWeightedProposalMsg(
+			opWeightMsgCloseAuction,
+			defaultWeightMsgCloseAuction,
+			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
+				cosasimulation.SimulateMsgCloseAuction(am.accountKeeper, am.bankKeeper, am.keeper)
 				return nil
 			},
 		),

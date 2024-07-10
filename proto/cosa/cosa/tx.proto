@@ -20,6 +20,7 @@ service Msg {
   rpc CreateAuction  (MsgCreateAuction ) returns (MsgCreateAuctionResponse );
   rpc ApproveAuction (MsgApproveAuction) returns (MsgApproveAuctionResponse);
   rpc CreatBid       (MsgCreatBid      ) returns (MsgCreatBidResponse      );
+  rpc CloseAuction   (MsgCloseAuction  ) returns (MsgCloseAuctionResponse  );
 }
 // MsgUpdateParams is the Msg/UpdateParams request type.
 message MsgUpdateParams {
@@ -75,5 +76,17 @@ message MsgCreatBid {
 
 message MsgCreatBidResponse {
   uint64 id = 1;
+}
+
+message MsgCloseAuction {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator    = 1;
+  uint64 id         = 2;
+  uint64 highestBid = 3;
+}
+
+message MsgCloseAuctionResponse {
+  string winner     = 1;
+  uint64 highestBid = 2;
 }
 
