@@ -1,0 +1,17 @@
+syntax = "proto3";
+package cosa.cosa;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+import "cosa/cosa/params.proto";
+
+option go_package = "cosa/x/cosa/types";
+
+// GenesisState defines the cosa module's genesis state.
+message GenesisState {
+  // params defines all the parameters of the module.
+  Params params = 1 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true
+  ];
+}
