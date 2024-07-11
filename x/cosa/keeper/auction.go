@@ -101,7 +101,12 @@ func IDBytes(id uint64) []byte {
 func (k Keeper) Blocker (ctx sdk.Context) {
 	auctions:= k.GetAllAuctions(ctx)
 	for _, auction:= range auctions {
-		if auction.Status == Approved && ctx.BlockTime().After(auction.Endtime.AsTime()) {
+		endtime, err:= sdk.ParseTime(auction.Endtime)
+		if err != nil {
+			ctx.Logger().Error("Failed to parse auction end time", "auctionID", auction.Id, "error", err)
+            continue
+		}
+		if auction.Status == Approved && ctx.BlockTime().After(endtime) {
 			if len(auction.Bids) > 0 {
 				auction.Status = Closed
 				auction.Owner = auction.HighestBidder
@@ -114,3 +119,4 @@ func (k Keeper) Blocker (ctx sdk.Context) {
 		}
 	}
 }
+

@@ -3,8 +3,6 @@ package cosa.cosa;
 
 option go_package = "cosa/x/cosa/types";
 
-import "google/protobuf/timestamp.proto";
-
 message Bid {
   string bidder = 1;
   uint64 amount = 2;
@@ -20,7 +18,7 @@ message Auction {
   string status = 6; 
   string owner = 7; 
   uint64 salePrice = 8;
-  google.protobuf.Timestamp endtime = 9; 
+  string endtime = 9; 
   repeated Bid bids = 10;
   string highestBidder = 11;
   uint64 highestBid = 12;

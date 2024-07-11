@@ -19,11 +19,16 @@ func (k msgServer) CloseAuction(goCtx context.Context, msg *types.MsgCloseAuctio
 		return nil, sdkerrors.Wrapf(sdkerror.ErrKeyNotFound, "auction %d doesn't exist", msg.Id)
 	}
 
+	endtime, err:= sdk.ParseTime(auction.Endtime)
+	if err != nil {
+		return nil, sdkerrors.Wrapf(sdkerror.ErrInvalidType, "failed to parse endtime: %v", err)
+	}
+
 	if auction.Status != Approved {
 		return nil, sdkerrors.Wrap(sdkerror.ErrUnauthorized, "auction is not approved")
 	}
 
-	if ctx.BlockTime().Before(auction.Endtime.AsTime()) {
+	if ctx.BlockTime().Before(endtime) {
         return nil, sdkerrors.Wrap(sdkerror.ErrUnauthorized, "auction has not ended yet")
     }
 

@@ -9,7 +9,6 @@ import (
 	sdkerrors "cosmossdk.io/errors"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerror "github.com/cosmos/cosmos-sdk/types/errors"
-	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func (k msgServer) ApproveAuction(goCtx context.Context, msg *types.MsgApproveAuction) (*types.MsgApproveAuctionResponse, error) {
@@ -25,9 +24,10 @@ func (k msgServer) ApproveAuction(goCtx context.Context, msg *types.MsgApproveAu
 	}
 
 	endTime := ctx.BlockTime().Add(time.Duration(auction.Duration) * time.Second)
+	time:= sdk.FormatTimeString(endTime)
 
 	auction.Status = Approved
-	auction.Endtime = timestamppb.New(endTime)
+	auction.Endtime = time
 
 	k.SetAuction(ctx, auction)
 

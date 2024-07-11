@@ -22,7 +22,12 @@ func (k msgServer) CreatBid(goCtx context.Context, msg *types.MsgCreatBid) (*typ
 		return nil, sdkerrors.Wrapf(sdkerror.ErrKeyNotFound, "auction %d doesnt is not approved", auction.Id)
 	}
 
-	if ctx.BlockTime().After(auction.Endtime.AsTime()) {
+	endtime, err:= sdk.ParseTime(auction.Endtime)
+	if err != nil {
+		return nil, sdkerrors.Wrapf(sdkerror.ErrInvalidType, "failed to parse endtime: %v", err)
+	}
+
+	if ctx.BlockTime().After(endtime) {
 		return nil, sdkerrors.Wrap(sdkerror.ErrUnauthorized, "auction has ended")
 	}
 

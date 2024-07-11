@@ -8,13 +8,13 @@ import (
 	"cosa/x/cosa/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func (k msgServer) CreateAuction(goCtx context.Context, msg *types.MsgCreateAuction) (*types.MsgCreateAuctionResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
-	endtime := timestamppb.New(time.Now().Add(time.Duration(msg.Duration)))
-	fmt.Printf("endtime: %v\n", endtime)
+	endTime := time.Now().Add(time.Duration(msg.Duration))
+	fmt.Printf("endtime: %v\n", endTime)
+	endtime:= sdk.FormatTimeString(endTime)
 
 	auction := types.Auction{
 		Item:          msg.Item,
